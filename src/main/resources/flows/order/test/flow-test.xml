@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="personalInfo" class="com.example.demo.model.PersonalInfo"/>
+    <var name="productInfo" class="com.example.demo.model.ProductInfo"/>
+    <var name="companyInfo" class="com.example.demo.model.CompanyInfo"/>
+
+    <on-start>
+        <evaluate expression="orderHandler.init()"
+                  result="flowScope.orderModel"/>
+    </on-start>
+
+    <view-state id="product" view="flows/order/order-product" model="productInfo">
+        <transition on="next" to="personal"/>
+        <on-exit>
+            <evaluate expression="orderHandler.addProductInfo(flowScope.orderModel, productInfo)"/>
+        </on-exit>
+    </view-state>
+
+    <view-state id="personal" view="flows/order/order-personal" model="personalInfo">
+        <transition on="next" to="company"/>
+        <transition on="previous" to="product"/>
+        <on-exit>
+            <evaluate expression="orderHandler.addPersonalInfo(flowScope.orderModel, personalInfo)"/>
+        </on-exit>
+    </view-state>
+
+    <view-state id="company" view="flows/order/order-company" model="companyInfo">
+        <transition on="next" to="confirm"/>
+        <transition on="previous" to="personal"/>
+        <on-exit>
+            <evaluate expression="orderHandler.addCompanyInfo(flowScope.orderModel, companyInfo)"/>
+        </on-exit>
+    </view-state>
+
+    <view-state id="confirm" view="flows/order/order-confirm" model="flowScope.orderModel">
+        <transition on="next" to="success"/>
+        <transition on="previous" to="company"/>
+    </view-state>
+
+    <end-state id="success" view="flows/order/order-success"/>
+</flow>

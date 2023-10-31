@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Выбор товара</title>
+</head>
+<body>
+<h1>Выберите товар:</h1>
+<hr/>
+<button><a href="http://localhost:8080/">На главную</a></button>
+<form method="post" th:object="${productInfo}">
+    <div>
+        <p>1. Телевизор</p>
+        <p>2. Компьютер</p>
+        <p>3. Мяч</p>
+        <p>4. Гиря</p>
+        <p>5. Гитара</p>
+        <p>6. Пианино</p>
+        <p>7. Кресло</p>
+        <p>8. Диван</p>
+        <p>9. Стол</p>
+        <p>10. Стул</p>
+        <label for="product">Введите название товара</label>
+        <div>
+            <input th:field="*{product}" type="text" id="product" placeholder="Товар" autofocus/>
+            <small th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></small>
+        </div>
+    </div>
+    <div>
+        <button type="submit" name="_eventId_next">Вперед</button>
+    </div>
+</form>
+</body>
+</html>

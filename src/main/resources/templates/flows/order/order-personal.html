@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Данные о получателе</title>
+</head>
+<body>
+<h1>Заполните данные о получателе:</h1>
+<hr/>
+<button><a href="http://localhost:8080/">На главную</a></button>
+<form method="post" th:object="${personalInfo}" enctype="multipart/form-data">
+    <div>
+        <label for="firstname">Имя</label>
+        <div>
+            <input th:field="*{firstname}" type="text" id="firstname" placeholder="Имя"/>
+            <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></small>
+        </div>
+    </div>
+    <div>
+        <label for="lastname">Фамилия</label>
+        <div>
+            <input th:field="*{lastname}" type="text" id="lastname" placeholder="Фамилия"/>
+            <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small>
+        </div>
+    </div>
+    <div>
+        <label for="phone">Телефон</label>
+        <div>
+            <input th:field="*{phone}" type="text" id="phone" placeholder="Телефон"/>
+            <small th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+        </div>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <div>
+            <input th:field="*{email}" type="text" id="email" placeholder="Email"/>
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+        </div>
+    </div>
+    <div>
+        <label for="address">Адрес</label>
+        <div>
+            <input th:field="*{address}" type="text" id="address" placeholder="Адрес"/>
+            <small th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></small>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button type="submit" name="_eventId_previous">Назад</button>
+            <button type="submit" name="_eventId_next">Вперед</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

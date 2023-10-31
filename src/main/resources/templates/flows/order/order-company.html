@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Выбор транспортной компании</title>
+</head>
+<body>
+<h1>Выберите транспортную компанию:</h1>
+<hr/>
+<button><a href="http://localhost:8080/">На главную</a></button>
+<form method="post" th:object="${companyInfo}">
+    <div>
+        <p>1. DPD</p>
+        <p>2. Почта Росии</p>
+        <p>3. Горизонт</p>
+        <p>4. FedEx</p>
+        <p>5. СДЭК</p>
+        <label for="company">Введите название транспортной компании</label>
+        <div>
+            <input th:field="*{company}" type="text" id="company" placeholder="Компания" autofocus/>
+            <small th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></small>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button type="submit" name="_eventId_previous">Назад</button>
+            <button type="submit" name="_eventId_next">Вперед</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

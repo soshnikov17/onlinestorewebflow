@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Подтверждение данных</title>
+</head>
+<body>
+<div>
+    <form method="post" th:object="${orderModel}">
+        <h1>Подтверждение данных о заказе:</h1>
+        <hr/>
+        <button><a href="http://localhost:8080/">На главную</a></button>
+        <div>
+            <div>
+                <h2>Персональная информация</h2>
+                <p th:text="${orderModel.personalInfo.firstname}"></p>
+                <p th:text="${orderModel.personalInfo.lastname}"></p>
+                <p th:text="${orderModel.personalInfo.phone}"></p>
+                <p th:text="${orderModel.personalInfo.email}"></p>
+                <p th:text="${orderModel.personalInfo.address}"></p>
+            </div>
+            <div>
+                <h2>Информация о товаре</h2>
+                <p th:text="${orderModel.productInfo.product}"></p>
+            </div>
+            <div>
+                <h2>Информация о транспортной компании</h2>
+                <p th:text="${orderModel.companyInfo.company}"></p>
+            </div>
+        </div>
+        <div th:if="${!#arrays.isEmpty(flowRequestContext.messageContext.getMessagesBySource('registration'))}">
+                    <span th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('registration')}"
+                          th:text="${err.text}"></span>
+        </div>
+        <button type="submit" name="_eventId_previous">Назад</button>
+        <button type="submit" name="_eventId_next">Подтвердить</button>
+    </form>
+</div>
+</body>
+</html>
